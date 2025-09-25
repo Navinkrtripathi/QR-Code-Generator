@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>QR Code Generator | Code Traversal</title>
+</head>
+<body>
+    <header class="header">
+  <nav>
+    <div class="title">
+      <h1>QR Code Generator</h1>
+      <p>Create custom QR codes for various purposes.</p>
+    </div>
+
+    <ul>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="events.html">Services</a></li>
+      <li><a href="register.html">Register</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+    <div class="container">
+        <div class="box main-generator">
+            <div class="qr-header">
+                <h1>Generate QR Code</h1>
+                <input type="text" placeholder="Type your text or URL" id="qr-text">
+                <div class="options">
+                    <label for="sizes">Select Size:</label>
+                    <select id="sizes">
+                        <option value="100">100x100</option>
+                        <option value="200">200x200</option>
+                        <option value="300">300x300</option>
+                        <option value="400">400x400</option>
+                    </select>
+                </div>
+                <div class="customization">
+                    <label for="fgColor">Foreground Color:</label>
+                    <input type="color" id="fgColor" value="#000000">
+                    <label for="bgColor">Background Color:</label>
+                    <input type="color" id="bgColor" value="#ffffff">
+                </div>
+            </div>
+            <div class="qr-body"></div>
+            <div class="qr-footer">
+                <a href="#" id="generateBtn">Generate</a>
+                <a href="#" id="downloadBtn" download="QR_Code.png">Download</a>
+                <a href="#" id="shareBtn">Share</a>
+            </div>
+        </div>
+
+        <div class="box custom-qr">
+            <div class="qr-header">
+                <h2>Custom QR with Logo</h2>
+                <input type="text" placeholder="Your website or a message" id="custom-qr-text">
+                <div class="options">
+                    <label for="custom-sizes">Select Size:</label>
+                    <select id="custom-sizes">
+                        <option value="100">100x100</option>
+                        <option value="200">200x200</option>
+                        <option value="300">300x300</option>
+                        <option value="400">400x400</option>
+                    </select>
+                </div>
+                <div class="customization">
+                    <label for="logoUpload">Upload Logo:</label>
+                    <input type="file" id="logoUpload" accept="image/*">
+                </div>
+            </div>
+            <div class="qr-body custom-qr-body"></div>
+            <div class="qr-footer">
+                <a href="#" id="generateCustomBtn">Generate</a>
+                <a href="#" id="downloadCustomBtn" download="QR_Code.png">Download</a>
+            </div>
+        </div>
+        
+        <div class="box restro-order-system">
+            <div class="qr-header">
+                <h2>Restaurant Order System</h2>
+                <input type="text" placeholder="Restaurant Name" id="restro-name">
+                <input type="text" placeholder="Table Number" id="restro-table">
+                <input type="text" placeholder="Menu Link (URL)" id="restro-menu-link">
+                <div class="options">
+                    <label for="restro-sizes">Select Size:</label>
+                    <select id="restro-sizes">
+                        <option value="100">100x100</option>
+                        <option value="200">200x200</option>
+                        <option value="300">300x300</option>
+                        <option value="400">400x400</option>
+                    </select>
+                </div>
+            </div>
+            <div class="qr-body restro-qr-body"></div>
+            <div class="qr-footer">
+                <a href="#" id="generateRestroBtn">Generate</a>
+                <a href="#" id="downloadRestroBtn" download="QR_Code.png">Download</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="info-section">
+        <h2>About QR Codes</h2>
+        <p>QR codes (Quick Response codes) are two-dimensional barcodes that can store a variety of information, such as URLs, text, contact details, and more. They can be scanned using a smartphone camera or a dedicated QR code reader app.</p>
+        <h3>Common Uses of QR Codes:</h3>
+        <ul>
+            <li><strong>Marketing and Advertising:</strong> Businesses use QR codes in advertisements, posters, and flyers to direct customers to their websites or promotional content.</li>
+            <li><strong>Product Packaging:</strong> QR codes on product packaging provide additional information about the product, such as usage instructions or nutritional facts.</li>
+            <li><strong>Event Management:</strong> Event organizers use QR codes for ticketing and check-ins, allowing attendees to quickly access event details.</li>
+            <li><strong>Contactless Payments:</strong> QR codes facilitate secure and convenient payments through mobile payment apps.</li>
+            <li><strong>Wi-Fi Access:</strong> QR codes can store Wi-Fi credentials, allowing users to connect to a network by simply scanning the code.</li>
+        </ul>
+        <p>With the increasing adoption of smartphones, QR codes have become a popular tool for sharing information quickly and efficiently. They offer a seamless way to bridge the physical and digital worlds.</p>
+
+    </section>
+
+    <div class="footer">
+        <p>&copy; 2024 Code Traversal. All rights reserved.</p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
