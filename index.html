@@ -1,127 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>QR Code Generator | Code Traversal</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>QR Solution Platform</title>
 </head>
 <body>
-    <header class="header">
-  <nav>
-    <div class="title">
-      <h1>QR Code Generator</h1>
-      <p>Create custom QR codes for various purposes.</p>
-    </div>
+    <!-- <header class="header">
+        <nav>
+            <div class="title">
+                <h1>QR Solution Platform</h1>
+                <p>Create, scan, manage & reuse your QR codes.</p>
+            </div>
 
-    <ul>
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="events.html">Services</a></li>
-      <li><a href="register.html">Register</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
+            <ul>
+                <li><a href="#" class="nav-link active" data-section="generate">Generate</a></li>
+                <li><a href="#" class="nav-link" data-section="scan">Scan</a></li>
+                <li><a href="#" class="nav-link" data-section="history">History</a></li>
+                <li><a href="#" class="nav-link" data-section="bulk">Bulk</a></li>
+                <li><a href="#" class="nav-link" data-section="about">About</a></li>
+            </ul>
+
+            
+            <div class="auth-bar">
+                <span id="userEmail">Not logged in</span>
+                <button id="signupBtn">Sign Up</button>
+                <button id="loginBtn">Login</button>
+                <button id="logoutBtn" class="hidden">Logout</button>
+            </div>
+        </nav>
+    </header> -->
+
+    <header class="header">
+    <nav>
+        <div class="title">
+            <h1>QR Solution Platform</h1>
+            <p>Create, scan, manage & reuse your QR codes.</p>
+        </div>
+
+        <ul>
+            <li><a href="index.html" class="nav-link active" data-section="generate">Generate</a></li>
+            <li><a href="index.html#scan" class="nav-link" data-section="scan">Scan</a></li>
+            <li><a href="index.html#history" class="nav-link" data-section="history">History</a></li>
+            <li><a href="index.html#bulk" class="nav-link" data-section="bulk">Bulk</a></li>
+            <li><a href="index.html#about" class="nav-link" data-section="about">About</a></li>
+        </ul>
+
+        <!-- Auth Bar -->
+        <div class="auth-bar">
+            <span id="userEmail">Not logged in</span>
+            <!-- These two are now links to separate pages -->
+            <a id="signupBtn" href="signup.html">Sign Up</a>
+            <a id="loginBtn" href="login.html">Login</a>
+            <!-- Logout still handled by script.js (Firebase signOut) -->
+            <button id="logoutBtn" class="hidden">Logout</button>
+        </div>
+    </nav>
 </header>
 
-    <div class="container">
-        <div class="box main-generator">
-            <div class="qr-header">
-                <h1>Generate QR Code</h1>
-                <input type="text" placeholder="Type your text or URL" id="qr-text">
-                <div class="options">
-                    <label for="sizes">Select Size:</label>
-                    <select id="sizes">
-                        <option value="100">100x100</option>
-                        <option value="200">200x200</option>
-                        <option value="300">300x300</option>
-                        <option value="400">400x400</option>
-                    </select>
-                </div>
-                <div class="customization">
-                    <label for="fgColor">Foreground Color:</label>
-                    <input type="color" id="fgColor" value="#000000">
-                    <label for="bgColor">Background Color:</label>
-                    <input type="color" id="bgColor" value="#ffffff">
-                </div>
-            </div>
-            <div class="qr-body"></div>
-            <div class="qr-footer">
-                <a href="#" id="generateBtn">Generate</a>
-                <a href="#" id="downloadBtn" download="QR_Code.png">Download</a>
-                <a href="#" id="shareBtn">Share</a>
-            </div>
-        </div>
 
-        <div class="box custom-qr">
-            <div class="qr-header">
-                <h2>Custom QR with Logo</h2>
-                <input type="text" placeholder="Your website or a message" id="custom-qr-text">
-                <div class="options">
-                    <label for="custom-sizes">Select Size:</label>
-                    <select id="custom-sizes">
-                        <option value="100">100x100</option>
-                        <option value="200">200x200</option>
-                        <option value="300">300x300</option>
-                        <option value="400">400x400</option>
-                    </select>
+    <main>
+
+        <!-- ========== GENERATE SECTION ========== -->
+        <section id="section-generate" class="section active">
+            <div class="section-header">
+                <h2>Generate QR Codes</h2>
+                <p>Create standard, branded and restaurant QR codes.</p>
+            </div>
+
+            <div class="container">
+                <!-- Standard QR Generator -->
+                <div class="box main-generator">
+                    <div class="qr-header">
+                        <h1>Standard QR Code</h1>
+                        <input type="text" placeholder="Type your text or URL" id="qr-text" />
+                        <div class="options">
+                            <label for="sizes">Size:</label>
+                            <select id="sizes">
+                                <option value="100">100x100</option>
+                                <option value="200" selected>200x200</option>
+                                <option value="300">300x300</option>
+                                <option value="400">400x400</option>
+                            </select>
+                        </div>
+                        <div class="customization">
+                            <label for="fgColor">Foreground:</label>
+                            <input type="color" id="fgColor" value="#000000" />
+                            <label for="bgColor">Background:</label>
+                            <input type="color" id="bgColor" value="#ffffff" />
+                        </div>
+                    </div>
+                    <div class="qr-body"></div>
+                    <div class="qr-footer">
+                        <a href="#" id="generateBtn">Generate</a>
+                        <a href="#" id="downloadBtn" download="QR_Code.png">Download</a>
+                        <a href="#" id="shareBtn">Share</a>
+                    </div>
                 </div>
-                <div class="customization">
-                    <label for="logoUpload">Upload Logo:</label>
-                    <input type="file" id="logoUpload" accept="image/*">
+
+                <!-- Custom QR with Logo -->
+                <div class="box custom-qr">
+                    <div class="qr-header">
+                        <h2>Custom QR with Logo</h2>
+                        <input
+                            type="text"
+                            placeholder="Your website or a message"
+                            id="custom-qr-text"
+                        />
+                        <div class="options">
+                            <label for="custom-sizes">Size:</label>
+                            <select id="custom-sizes">
+                                <option value="100">100x100</option>
+                                <option value="200" selected>200x200</option>
+                                <option value="300">300x300</option>
+                                <option value="400">400x400</option>
+                            </select>
+                        </div>
+                        <div class="customization">
+                            <label for="logoUpload">Upload Logo:</label>
+                            <input type="file" id="logoUpload" accept="image/*" />
+                        </div>
+                    </div>
+                    <div class="qr-body custom-qr-body"></div>
+                    <div class="qr-footer">
+                        <a href="#" id="generateCustomBtn">Generate</a>
+                        <a href="#" id="downloadCustomBtn" download="QR_Code.png">Download</a>
+                    </div>
+                </div>
+
+                <!-- Restaurant / Shop QR -->
+                <div class="box restro-order-system">
+                    <div class="qr-header">
+                        <h2>Restaurant / Shop QR</h2>
+                        <input type="text" placeholder="Restaurant / Shop Name" id="restro-name" />
+                        <input type="text" placeholder="Table / Counter Number" id="restro-table" />
+                        <input type="text" placeholder="Menu / Catalog Link (URL)" id="restro-menu-link" />
+                        <div class="options">
+                            <label for="restro-sizes">Size:</label>
+                            <select id="restro-sizes">
+                                <option value="100">100x100</option>
+                                <option value="200" selected>200x200</option>
+                                <option value="300">300x300</option>
+                                <option value="400">400x400</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="qr-body restro-qr-body"></div>
+                    <div class="qr-footer">
+                        <a href="#" id="generateRestroBtn">Generate</a>
+                        <a href="#" id="downloadRestroBtn" download="QR_Code.png">Download</a>
+                    </div>
                 </div>
             </div>
-            <div class="qr-body custom-qr-body"></div>
-            <div class="qr-footer">
-                <a href="#" id="generateCustomBtn">Generate</a>
-                <a href="#" id="downloadCustomBtn" download="QR_Code.png">Download</a>
+        </section>
+
+        <!-- ========== QR SCANNER SECTION ========== -->
+        <section id="section-scan" class="section">
+            <div class="section-header">
+                <h2>Scan QR Codes</h2>
+                <p>Use your device camera to read QR codes instantly.</p>
             </div>
-        </div>
-        
-        <div class="box restro-order-system">
-            <div class="qr-header">
-                <h2>Restaurant Order System</h2>
-                <input type="text" placeholder="Restaurant Name" id="restro-name">
-                <input type="text" placeholder="Table Number" id="restro-table">
-                <input type="text" placeholder="Menu Link (URL)" id="restro-menu-link">
-                <div class="options">
-                    <label for="restro-sizes">Select Size:</label>
-                    <select id="restro-sizes">
-                        <option value="100">100x100</option>
-                        <option value="200">200x200</option>
-                        <option value="300">300x300</option>
-                        <option value="400">400x400</option>
-                    </select>
+
+            <div class="container">
+                <div class="box">
+                    <div class="qr-header">
+                        <h2>Camera Scanner</h2>
+                    </div>
+                    <div id="qr-reader"></div>
+                    <div id="qr-scan-result" class="scan-result">
+                        <strong>Result:</strong> <span id="qr-scan-text">No QR scanned yet.</span>
+                    </div>
+                    <div class="qr-footer">
+                        <a href="#" id="stopScanBtn">Stop Scanning</a>
+                    </div>
                 </div>
             </div>
-            <div class="qr-body restro-qr-body"></div>
-            <div class="qr-footer">
-                <a href="#" id="generateRestroBtn">Generate</a>
-                <a href="#" id="downloadRestroBtn" download="QR_Code.png">Download</a>
+        </section>
+
+        <!-- ========== HISTORY SECTION ========== -->
+        <section id="section-history" class="section">
+            <div class="section-header">
+                <h2>QR History</h2>
+                <p>All QR codes you generate are stored locally – and pushed to cloud when logged in.</p>
+            </div>
+
+            <div class="container">
+                <div class="box history-box">
+                    <div class="qr-header">
+                        <h2>Saved QR Codes</h2>
+                    </div>
+                    <div id="history-list" class="history-list">
+                        <!-- Filled by JS -->
+                    </div>
+                    <div class="qr-footer">
+                        <a href="#" id="clearHistoryBtn">Clear Local History</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== BULK GENERATOR SECTION ========== -->
+        <section id="section-bulk" class="section">
+            <div class="section-header">
+                <h2>Bulk QR Generator</h2>
+                <p>Use multi-line input or upload CSV and download all QR codes in a ZIP.</p>
+            </div>
+
+            <div class="container">
+                <div class="box">
+                    <div class="qr-header">
+                        <h2>Bulk Input</h2>
+                        <textarea
+                            id="bulk-input"
+                            rows="8"
+                            placeholder="One text / URL per line..."
+                        ></textarea>
+
+                        <label for="bulkCsv">Or upload a CSV file (first column used):</label>
+                        <input type="file" id="bulkCsv" accept=".csv" />
+                    </div>
+                    <div class="qr-footer">
+                        <a href="#" id="generateBulkBtn">Generate All</a>
+                        <a href="#" id="downloadBulkZipBtn">Download ZIP</a>
+                    </div>
+                    <div id="bulk-results" class="bulk-results">
+                        <!-- Bulk QR cards appear here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== ABOUT SECTION ========== -->
+        <!-- ========== ABOUT SECTION ========== -->
+<section id="section-about" class="section">
+    <div class="container about-container">
+        <div class="box">
+            <div class="About">
+                <h2>About This QR Solution Platform</h2>
+                <p>
+                    This platform is designed to be a complete, browser-based QR management system.
+                    You can generate standard QR codes, branded codes with your own logo, restaurant /
+                    shop codes with table and menu details, and even bulk QR codes using text or CSV input.
+                </p>
+                <p>
+                    The built-in QR scanner lets you read codes directly using your device camera, so you
+                    don’t have to install a separate app. All QR codes generated on this device are stored
+                    in local history, and when you log in with your account, they can also be backed up
+                    securely to the cloud using Firebase.
+                </p>
+                <p>
+                    Typical use cases include business cards, product packaging, event tickets, restaurant
+                    menus, college projects, quick links to forms, notes or portfolios, and many more.
+                    Because everything runs on web technologies (HTML, CSS, JavaScript), it’s easy to deploy
+                    this platform on any hosting service or integrate it into a larger system.
+                </p>
+                <p>
+                    The goal is to provide a flexible tool that is simple enough for students and small
+                    businesses, but powerful enough to be extended into a full SaaS product with analytics,
+                    role-based access, and advanced templates.
+                </p>
+
+                <div class="contact-section">
+                    <h3>Contact & Support</h3>
+                    <p>If you have any questions, suggestions, or collaboration ideas, feel free to connect:</p>
+                    <ul class="contact-list">
+                        <li>
+                            <strong>Email:</strong>
+                            <a href="mailto:nk545963@gmail.com">nk545963@gmail.com</a>
+                        </li>
+                        <li>
+                            <strong>Phone / WhatsApp:</strong>
+                            <a href="tel:+917782837173">+91 77828 37173</a>
+                        </li>
+                        <li>
+                            <strong>LinkedIn:</strong>
+                            <a href="https://www.linkedin.com/in/navin-kumar-tripathi-69a1b3254" target="_blank" rel="noopener">
+                                Navin Kumar Tripathi
+                            </a>
+                        </li>
+                        <li>
+                            <strong>GitHub:</strong>
+                            <a href="https://github.com/your-github-username" target="_blank" rel="noopener">
+                                github.com
+                            </a>
+                            <!-- replace with your actual GitHub username -->
+                        </li>
+                        <li>
+                            <strong>YouTube / Demo Videos:</strong>
+                            <a href="https://youtube.com/" target="_blank" rel="noopener">
+                                youtube.com
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="contact-note">
+                        
+                    </p>
+                </div>
             </div>
         </div>
     </div>
+</section>
 
-    <section class="info-section">
-        <h2>About QR Codes</h2>
-        <p>QR codes (Quick Response codes) are two-dimensional barcodes that can store a variety of information, such as URLs, text, contact details, and more. They can be scanned using a smartphone camera or a dedicated QR code reader app.</p>
-        <h3>Common Uses of QR Codes:</h3>
-        <ul>
-            <li><strong>Marketing and Advertising:</strong> Businesses use QR codes in advertisements, posters, and flyers to direct customers to their websites or promotional content.</li>
-            <li><strong>Product Packaging:</strong> QR codes on product packaging provide additional information about the product, such as usage instructions or nutritional facts.</li>
-            <li><strong>Event Management:</strong> Event organizers use QR codes for ticketing and check-ins, allowing attendees to quickly access event details.</li>
-            <li><strong>Contactless Payments:</strong> QR codes facilitate secure and convenient payments through mobile payment apps.</li>
-            <li><strong>Wi-Fi Access:</strong> QR codes can store Wi-Fi credentials, allowing users to connect to a network by simply scanning the code.</li>
-        </ul>
-        <p>With the increasing adoption of smartphones, QR codes have become a popular tool for sharing information quickly and efficiently. They offer a seamless way to bridge the physical and digital worlds.</p>
 
-    </section>
+    </main>
 
     <div class="footer">
-        <p>&copy; 2024 Code Traversal. All rights reserved.</p>
+        <p>&copy; 2025 Code Traversal. All rights reserved.</p>
     </div>
+
+    <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
+    <!-- JSZip + FileSaver for ZIP download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <!-- Firebase (compat version for easy use in plain JS) -->
+    <!-- Replace config in script.js with your own Firebase project keys -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
     <script src="script.js"></script>
 </body>
 </html>
