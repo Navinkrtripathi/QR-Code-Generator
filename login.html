@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta charset="UTF-8" />
+    <title>Login | QR Solution Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header class="header">
+        <nav>
+            <div class="title">
+                <h1>Login</h1>
+                <p>Access your QR Solution Platform account.</p>
+            </div>
+            <ul>
+                <li><a href="index.html">← Back to Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="box">
+                <div class="qr-header">
+                    <h2>Welcome Back</h2>
+                </div>
+                <form id="loginForm" class="auth-form">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="you@example.com" required />
+
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Your password" required />
+
+                    <button type="submit" class="auth-submit">Login</button>
+                </form>
+
+                <p class="auth-switch">
+                    Don't have an account yet?
+                    <a href="signup.html">Create one</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <div class="footer">
+        <p>&copy; 2025 Code Traversal. All rights reserved.</p>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Main app script (contains initFirebase and auth/db variables) -->
+    <script src="script.js"></script>
+
+    <script>
+        const loginForm = document.getElementById("loginForm");
+        const loginEmail = document.getElementById("loginEmail");
+        const loginPassword = document.getElementById("loginPassword");
+
+        loginForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const email = loginEmail.value.trim();
+            const password = loginPassword.value;
+
+            if (!email || !password) {
+                alert("Please fill both email and password.");
+                return;
+            }
+            if (!window.auth) {
+                alert("Firebase not initialized. Please check your configuration.");
+                return;
+            }
+
+            try {
+                await auth.signInWithEmailAndPassword(email, password);
+                alert("Logged in successfully.");
+                window.location.href = "index.html";
+            } catch (err) {
+                console.error(err);
+                alert(err.message || "Error while logging in.");
+            }
+        });
+    </script>
+</body>
+</html>
